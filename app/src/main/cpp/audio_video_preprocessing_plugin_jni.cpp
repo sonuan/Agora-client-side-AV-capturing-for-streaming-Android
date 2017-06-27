@@ -149,7 +149,7 @@ JNIEXPORT void JNICALL Java_io_agora_ex_AudioVideoPreProcessing_doRegisterPrePro
         return;
 
     agora::util::AutoPtr<agora::media::IMediaEngine> mediaEngine;
-    mediaEngine.queryInterface(*rtcEngine, agora::rtc::AGORA_IID_MEDIA_ENGINE);
+    mediaEngine.queryInterface(rtcEngine, agora::rtc::AGORA_IID_MEDIA_ENGINE);
     if (mediaEngine) {
         mediaEngine->registerVideoFrameObserver(&s_videoFrameObserver);
         mediaEngine->registerAudioFrameObserver(&s_audioFrameObserver);
@@ -174,7 +174,7 @@ JNIEXPORT void JNICALL Java_io_agora_ex_AudioVideoPreProcessing_doDeregisterPreP
   (JNIEnv *env, jobject obj)
 {
     agora::util::AutoPtr<agora::media::IMediaEngine> mediaEngine;
-    mediaEngine.queryInterface(*rtcEngine, agora::rtc::AGORA_IID_MEDIA_ENGINE);
+    mediaEngine.queryInterface(rtcEngine, agora::rtc::AGORA_IID_MEDIA_ENGINE);
     if (mediaEngine) {
         mediaEngine->registerVideoFrameObserver(NULL);
         mediaEngine->registerAudioFrameObserver(NULL);

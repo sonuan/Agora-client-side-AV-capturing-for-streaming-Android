@@ -9,6 +9,7 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import org.slf4j.Logger;
@@ -208,7 +209,12 @@ public class WorkerThread extends Thread {
             if (TextUtils.isEmpty(appId)) {
                 throw new RuntimeException("NEED TO use your App ID, get your own ID at https://dashboard.agora.io/");
             }
-            mRtcEngine = RtcEngine.create(mContext, appId, mEngineEventHandler.mRtcEventHandler);
+            try {
+                mRtcEngine = RtcEngine.create(mContext, appId, mEngineEventHandler.mRtcEventHandler);
+            } catch (Exception e) {
+                log.error(Log.getStackTraceString(e));
+                throw new RuntimeException("NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e));
+            }
             mRtcEngine.setChannelProfile(Constants.CHANNEL_PROFILE_LIVE_BROADCASTING);
             mRtcEngine.enableAudioVolumeIndication(200, 3); // 200 ms
             mRtcEngine.enableVideo();
