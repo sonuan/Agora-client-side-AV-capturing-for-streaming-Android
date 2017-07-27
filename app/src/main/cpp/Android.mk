@@ -3,7 +3,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 # libyuv
 LOCAL_MODULE := yuv
-LOCAL_SRC_FILES := ../libs/$(TARGET_ARCH_ABI)/libyuv.a
+LOCAL_SRC_FILES := ../PREBUILT/$(TARGET_ARCH_ABI)/libyuv.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
