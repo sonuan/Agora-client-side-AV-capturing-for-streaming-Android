@@ -31,6 +31,8 @@ bool VMUtil::addJNIHostObject(JNIEnv *env,
 		                          jobject obj)
 {
     mJNIHost = env->NewGlobalRef(obj);
+
+    return TRUE;
 }
 
 bool VMUtil::removeJNIHostObject(JNIEnv *env)
@@ -39,6 +41,8 @@ bool VMUtil::removeJNIHostObject(JNIEnv *env)
         env->DeleteGlobalRef(mJNIHost);
         mJNIHost = NULL;
     }
+
+    return TRUE;
 }
 
 bool VMUtil::on_mixed_audio_data(int16_t const* data, int32_t length)
@@ -56,11 +60,12 @@ bool VMUtil::on_mixed_audio_data(int16_t const* data, int32_t length)
     jni_env->CallVoidMethod(mJNIHost, mOnMixedAudioData, retArray);
 
     jni_env->DeleteLocalRef(retArray);
+
+    return TRUE;
 }
 
 bool VMUtil::on_video_data(uint8_t const* yBuffer, uint8_t const* uBuffer, uint8_t const* vBuffer, int32_t width, int32_t height)
 {
-
     CHECK_POINTER(mJNIHost, FALSE, "mJNIHost is NULL!");
     AttachThreadScoped ats(mpVM);
     JNIEnv *jni_env = ats.env();
@@ -74,6 +79,8 @@ bool VMUtil::on_video_data(uint8_t const* yBuffer, uint8_t const* uBuffer, uint8
     jni_env->CallVoidMethod(mJNIHost, mOnVideoData, retArray, width, height);
 
     jni_env->DeleteLocalRef(retArray);
+
+    return TRUE;
 }
 
 VMUtil::VMUtil()
