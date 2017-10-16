@@ -66,4 +66,5 @@ dependencies {
         // workaround issue #73
         exclude group: 'com.google.android', module: 'android'
     }
+    compile 'com.qiniu:happy-dns:0.2.8'
 }
